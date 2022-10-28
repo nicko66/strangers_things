@@ -1,9 +1,13 @@
 import React from 'react';
+import PostsItem from './PostsItem';
 
-const Posts = (posts) => {
+const Posts = ({posts}) => {
+  console.log("posts", Posts)
   return (
     <div>
-        List of Posts
+        {posts.map((item) => {
+          return <PostsItem key={item._id} posts={item} />
+        })}
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Home = ({username}) => {
-    console.log("username", username)
   return (
     <>
     <h1>Welcome to Strangers Things</h1>

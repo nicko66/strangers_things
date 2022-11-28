@@ -6,7 +6,6 @@ import './Posts.css'
 import React, { useEffect, useState } from 'react';
 
 const Posts = ({posts, setPosts, token}) => {
-  console.log("posts", posts);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredPosts, setFilteredPosts] = useState(posts)

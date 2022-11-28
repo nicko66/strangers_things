@@ -15,7 +15,7 @@ const PostCreateForm = ({ token, setPosts}) => {
         event.preventDefault();
 
         const {error, post} = await createPosts(token, title, description, price, location);
-console.log(post)
+
         if (post) {
             post.isCreator = true;
             setPosts((prevPosts) => [...prevPosts, post]);
@@ -29,7 +29,7 @@ console.log(post)
         }
     }}>
         <h2>Create Post</h2>
-        
+
         <div className="field">
             <label htmlFor="title">Title</label>
             <input name="title" type="text" placeholder="title of post" 

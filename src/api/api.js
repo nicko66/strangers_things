@@ -137,7 +137,6 @@ const makeHeaders = (token) => {
       const { success, error, data } = await callAPI("/users/me", {
         token: token,
       });
-  console.log("data", data)
       if (success) {
         return {
           error: null,
@@ -182,7 +181,6 @@ const makeHeaders = (token) => {
           post: post,
         },
       });
-  console.log("success", success)
       if (success) {
         return {
           error: null,

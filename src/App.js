@@ -32,7 +32,6 @@ const App = () => {
     if (token) {
         const getUsername = async () => {
             const {username} = await fetchUsername(token);
-            console.log("username", username)
             setUsername(username);
           };
          getUsername(); 

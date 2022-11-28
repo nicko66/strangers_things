@@ -21,13 +21,11 @@ const PostDetail = (props) => {
 
         if (success) {
             setCommentText('');
-            
-            console.log('we successfully added a message!');
 
             await getPosts();
         } else {
             setErrorMessage(error);
-            console.log('failed to add a message');
+           
         }
     };
 

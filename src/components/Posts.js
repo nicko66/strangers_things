@@ -9,7 +9,7 @@ const Posts = ({posts, setPosts, token}) => {
   console.log("posts", posts);
 
   const [searchTerm, setSearchTerm] = useState('');
-  const [filteredPosts, setFilteredPosts] = useState('post')
+  const [filteredPosts, setFilteredPosts] = useState(posts)
 
   useEffect(() => {
 

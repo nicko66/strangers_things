@@ -3,9 +3,9 @@ import PostsItem from './PostsItem';
 import {Link} from 'react-router-dom';
 import { deletePost } from '../api/api';
 import './Posts.css'
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const Posts = ({posts, setPost, token}) => {
+const Posts = ({posts, setPosts, token}) => {
   console.log("posts", posts);
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -45,27 +45,28 @@ const Posts = ({posts, setPost, token}) => {
 
   const handleDeleteClick = async (postid) => {
     await deletePost(token, postid);
-    setPost((prevPosts) =>
-      prevPosts.filter((posts) => posts.id != postid) 
+    setPosts((prevPosts) =>
+      prevPosts.filter((posts) => posts._id != postid) 
     );
   };
 
-  return (<>
+  return (
+  <>
     <div className='ui icon input'>
      <input type="text" placeholder='Search'
        value={searchTerm}
        onChange={(event) => setSearchTerm(event.target.value)}></input>
        <i className='search icon'></i> 
     </div> 
-    <Link to="posts/create" className='ui button'>Create Post</Link>
+    <Link to="/posts/create" className='ui button'>Create Post</Link>
     <div className='posts-container' >
-        {posts.map((item) => {
+        {filteredPosts.map((item) => {
           return (
                <PostsItem key={item._id} post={item}
-                 headerElement={item.isCreator ? <div className='right floated aligned tiny header'>Mine</div> : null}          
+                 headerElement={item.isAuthor ? <div className='right floated aligned tiny header'>Mine</div> : null}          
           >
-          {item.isCreator ? (
-            <button onClick={() => handleDeleteClick(item.id)}
+          {item.isAuthor ? (
+            <button onClick={() => handleDeleteClick(item._id)}
               className="negative ui button left floated"
              
               >

@@ -12,7 +12,7 @@ return (
           <p>{post.description}</p>
           <div className="extra content">
             <div className=" center aligned header">
-              <Link to={`/posts/${post.id}`}>View Location</Link>
+              <Link to={`/posts/${post._id}`}>View Location</Link>
             </div>
           </div>
         </div>
@@ -21,14 +21,15 @@ return (
         style={{color: '#444', clear: 'both'}}
         >
 
-         {/* {post.comments.map((message) => {
+         {post.messages.map((message) => {
             return (
-            <div role="listitem" className="item">
-              <b>{comment.user.username}</b>
-              <p className="content">{comment.content}</p>
+            <div key={message.id} role="listitem" className="item">
+              <b>{message.username}</b>
+              <p className="content">{message.content}</p>
             </div>
-            ); */}
-          {/* })}  */}
+            ); 
+          })}  
+
         </div>
       </div>
     </div>

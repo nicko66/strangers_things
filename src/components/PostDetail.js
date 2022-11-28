@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useParams} from 'react-router-dom';
-import {addComment} from '../api/api';
+import {addMessage} from '../api/api';
 import PostsItem from './PostsItem';
 
 const PostDetail = (props) => {
@@ -10,24 +10,24 @@ const PostDetail = (props) => {
     const [errorMessage, setErrorMessage] = useState(null);
 
     const singlePost = post.find((onePost) => {
-        const foundPost = onePost.id == postId;
+        const foundPost = onePost._id == postId;
         return foundPost;
     });
 
     const handleOnSubmit = async (event) => {
         event.preventDefault();
 
-        const { success, error, comment } = await addComment(token, postId, commentText);
+        const { success, error, message } = await addMessage(token, postId, commentText);
 
         if (success) {
             setCommentText('');
             
-            console.log('we successfully added a comment!');
+            console.log('we successfully added a message!');
 
             await getPosts();
         } else {
             setErrorMessage(error);
-            console.log('failed to add a comment');
+            console.log('failed to add a message');
         }
     };
 
@@ -36,7 +36,7 @@ const PostDetail = (props) => {
     }
 
     return (<>
-        <PostsItem posts={singlePost} />
+        <PostsItem post={singlePost} />
         <form className="comment-form" onSubmit={handleOnSubmit}>
             <input type="text" placeholder="New Comment"
                 value={commentText}

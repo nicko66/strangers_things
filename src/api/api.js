@@ -159,14 +159,20 @@ const makeHeaders = (token) => {
     }
   };
   
-  export const createPosts = async (token, description, location) => {
-    try {
+  export const createPosts = async (token, title, description, price, location, willDeliver) => {
+    try { 
       const post = {
-        description: description,
+        title,
+        description,
+        price,
       };
   
       if (location) {
         post.location = location;
+      }
+
+      if (willDeliver) {
+        post.willDeliver = willDeliver;
       }
   
       const { success, error, data } = await callAPI("/posts", {
@@ -225,14 +231,14 @@ const makeHeaders = (token) => {
     }
   };
   
-  export const addComment = async (token, postId, comment) => {
+  export const addMessage = async (token, postId, message) => {
     try {
-      const { success, error, data } = await callAPI(`/posts/${postId}/comments`, {
+      const { success, error, data } = await callAPI(`/posts/${postId}/messages`, {
         token: token,
         method: "POST",
         body: {
-          comment: {
-            content: comment
+          message: {
+            content: message
           },
         },
       });
@@ -241,22 +247,22 @@ const makeHeaders = (token) => {
         return {
           success: success,
           error: null,
-          comment: data.comment,
+          message: data.message,
         };
       } else {
         return {
           success: success,
           error: error.message,
-          comment: null,
+          message: null,
         };
       }
     } catch (error) {
-      console.error(`POST /posts/${postId}/comments failed:`, error);
+      console.error(`POST /posts/${postId}/messages failed:`, error);
   
       return {
         success: false,
-        error: "Failed to create comment for post",
-        comment: null,
+        error: "Failed to create message for post",
+        message: null,
       };
     }
   };
